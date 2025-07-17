@@ -1,6 +1,6 @@
 {
   "name": "@oxog/isnumber",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A strict, fast, zero-dependency utility for checking JavaScript numbers",
   "keywords": [
     "number",
@@ -40,11 +40,11 @@
     "src"
   ],
   "scripts": {
-    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types",
-    "build:cjs": "tsc --module commonjs --outDir dist --target es2015 && mv dist/index.js dist/index.cjs",
+    "build": "npm run clean && npm run build:types && npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc --module commonjs --outDir dist --target es2015 && node -e \"const fs = require('fs'); fs.renameSync('dist/index.js', 'dist/index.cjs')\"",
     "build:esm": "tsc --module esnext --outDir dist --target es2015",
     "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
-    "clean": "rm -rf dist",
+    "clean": "node -e \"const fs = require('fs'); try { fs.rmSync('dist', { recursive: true, force: true }); } catch {}\"",
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
