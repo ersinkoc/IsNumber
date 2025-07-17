@@ -1,0 +1,70 @@
+{
+  "name": "@oxog/isnumber",
+  "version": "1.0.0",
+  "description": "A strict, fast, zero-dependency utility for checking JavaScript numbers",
+  "keywords": [
+    "number",
+    "is-number",
+    "isnumber",
+    "type",
+    "check",
+    "validate",
+    "validation",
+    "utility",
+    "finite",
+    "numeric"
+  ],
+  "homepage": "https://github.com/ersinkoc/isnumber#readme",
+  "bugs": {
+    "url": "https://github.com/ersinkoc/isnumber/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ersinkoc/isnumber.git"
+  },
+  "license": "MIT",
+  "author": "Ersin Koc",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types",
+    "build:cjs": "tsc --module commonjs --outDir dist --target es2015 && mv dist/index.js dist/index.cjs",
+    "build:esm": "tsc --module esnext --outDir dist --target es2015",
+    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage",
+    "benchmark": "tsx benchmark/index.ts",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run lint && npm run test && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "tinybench": "^2.5.1",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "packageManager": "npm@10.0.0",
+  "publishConfig": {
+    "access": "public"
+  }
+}
