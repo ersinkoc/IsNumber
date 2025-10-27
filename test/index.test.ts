@@ -112,6 +112,12 @@ describe('isNumber', () => {
       expect(isNumber('1 2 3', options)).toBe(false);
     });
 
+    it('should return false for hexadecimal strings', () => {
+      expect(isNumber('0xFF', options)).toBe(false);
+      expect(isNumber('0XFF', options)).toBe(false);
+      expect(isNumber('-0xFF', options)).toBe(false);
+    });
+
     it('should still work for primitive numbers', () => {
       expect(isNumber(5, options)).toBe(true);
       expect(isNumber(NaN, options)).toBe(false);

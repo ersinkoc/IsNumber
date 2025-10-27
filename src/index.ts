@@ -41,6 +41,10 @@ export function isNumber(value: unknown, options: Options = {}): boolean {
 
   // Handle string coercion
   if (allowCoercion && typeof value === 'string' && value.trim() !== '') {
+    // Prevent hexadecimal strings from being coerced
+    if (/^[-+]?0[xX]/.test(value)) {
+      return false;
+    }
     const num = Number(value);
     return Number.isFinite(num);
   }
