@@ -41,7 +41,7 @@
   ],
   "scripts": {
     "build": "npm run clean && npm run build:types && npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc --module commonjs --outDir dist --target es2015 && node -e \"const fs = require('fs'); fs.renameSync('dist/index.js', 'dist/index.cjs')\"",
+    "build:cjs": "tsc --module commonjs --outDir dist --target es2015 && node -e \"const fs = require('fs'); const src = 'dist/index.js'; const dest = 'dist/index.cjs'; if (fs.existsSync(src)) { fs.renameSync(src, dest); } else { console.error('Error: ' + src + ' not found'); process.exit(1); }\"",
     "build:esm": "tsc --module esnext --outDir dist --target es2015",
     "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
     "clean": "node -e \"const fs = require('fs'); try { fs.rmSync('dist', { recursive: true, force: true }); } catch {}\"",
@@ -54,11 +54,11 @@
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "@vitest/coverage-v8": "^1.0.0",
+    "@vitest/coverage-v8": "^4.0.10",
     "tinybench": "^2.5.1",
     "tsx": "^4.0.0",
     "typescript": "^5.0.0",
-    "vitest": "^1.0.0"
+    "vitest": "^4.0.10"
   },
   "engines": {
     "node": ">=14"

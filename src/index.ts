@@ -40,9 +40,13 @@ export function isNumber(value: unknown, options: Options = {}): boolean {
   }
 
   // Handle string coercion
-  if (allowCoercion && typeof value === 'string' && value.trim() !== '') {
-    // Prevent hexadecimal strings from being coerced
-    if (/^[-+]?0[xX]/.test(value)) {
+  if (allowCoercion && typeof value === 'string') {
+    const trimmed = value.trim();
+    if (trimmed === '') {
+      return false;
+    }
+    // Prevent non-decimal numeric literals (hexadecimal, octal, binary) from being coerced
+    if (/^[-+]?0[xXoObB]/.test(trimmed)) {
       return false;
     }
     const num = Number(value);

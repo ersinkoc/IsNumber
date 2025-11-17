@@ -116,6 +116,25 @@ describe('isNumber', () => {
       expect(isNumber('0xFF', options)).toBe(false);
       expect(isNumber('0XFF', options)).toBe(false);
       expect(isNumber('-0xFF', options)).toBe(false);
+      expect(isNumber('+0xFF', options)).toBe(false);
+    });
+
+    it('should return false for octal strings', () => {
+      expect(isNumber('0o10', options)).toBe(false);
+      expect(isNumber('0O10', options)).toBe(false);
+      expect(isNumber('-0o10', options)).toBe(false);
+      expect(isNumber('+0o10', options)).toBe(false);
+      expect(isNumber(' 0o10 ', options)).toBe(false);
+      expect(isNumber('0o777', options)).toBe(false);
+    });
+
+    it('should return false for binary strings', () => {
+      expect(isNumber('0b10', options)).toBe(false);
+      expect(isNumber('0B10', options)).toBe(false);
+      expect(isNumber('-0b10', options)).toBe(false);
+      expect(isNumber('+0b10', options)).toBe(false);
+      expect(isNumber(' 0b10 ', options)).toBe(false);
+      expect(isNumber('0b1111', options)).toBe(false);
     });
 
     it('should still work for primitive numbers', () => {
