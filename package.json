@@ -50,6 +50,7 @@
     "test:coverage": "vitest run --coverage",
     "benchmark": "tsx benchmark/index.ts",
     "lint": "tsc --noEmit",
+    "validate-fixes": "npm run build && node scripts/validate-fixes.cjs",
     "prepublishOnly": "npm run lint && npm run test && npm run build"
   },
   "devDependencies": {
